@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://di60ffgcypgw4"]
 
-[ext_resource type="Script" uid="uid://c4mx012ggauhw" path="res://scripts/ocean_generator.gd" id="1_6p1gb"]
+[ext_resource type="Shader" uid="uid://csfe4if7i3y3p" path="res://shaders/ocean_gerstner.gdshader" id="1_6p1gb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6p1gb"]
 
@@ -11,18 +11,28 @@ sky_material = SubResource("ProceduralSkyMaterial_6p1gb")
 background_mode = 2
 sky = SubResource("Sky_co4yx")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6p1gb"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_d0soh"]
+size = Vector2(50, 50)
+subdivide_width = 64
+subdivide_depth = 64
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_co4yx"]
+render_priority = 0
+shader = ExtResource("1_6p1gb")
+shader_parameter/amplitude = 1.0
+shader_parameter/angular_frequency = 2.0
+shader_parameter/wave_vector = Vector2(1, 0)
 
 [node name="GerstnerOcean" type="Node3D" unique_id=192684016]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2024993671]
-transform = Transform3D(-1, 1.3243605e-09, -8.741274e-08, -3.477997e-08, 0.9113242, 0.41168934, 8.020657e-08, 0.41168934, -0.9113242, 4.3429337, 3.4643254, -3.1891866)
+transform = Transform3D(0.99964863, -0.010913228, 0.024157835, -3.4779973e-08, 0.91132426, 0.41168937, -0.02650848, -0.4115447, 0.911004, 4.3429337, 10.378669, 60.556053)
 environment = SubResource("Environment_58q5r")
-
-[node name="OceanGenerator" type="Node3D" parent="." unique_id=1089128055]
-script = ExtResource("1_6p1gb")
-ocean_material = SubResource("ShaderMaterial_6p1gb")
-metadata/_custom_type_script = "uid://c4mx012ggauhw"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2106264239]
 transform = Transform3D(0.5207688, -0.7380121, 0.42911315, 0.14476243, 0.5717135, 0.80758125, -0.8413344, -0.3584437, 0.40456694, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1303851496]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4687395, 0, 5.482691)
+mesh = SubResource("PlaneMesh_d0soh")
+surface_material_override/0 = SubResource("ShaderMaterial_co4yx")
