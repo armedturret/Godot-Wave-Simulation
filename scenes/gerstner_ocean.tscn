@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://di60ffgcypgw4"]
+
+[ext_resource type="Script" uid="uid://c4mx012ggauhw" path="res://scripts/ocean_generator.gd" id="1_6p1gb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6p1gb"]
+
+[node name="GerstnerOcean" type="Node3D" unique_id=192684016]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2024993671]
+transform = Transform3D(-1, 1.3243632e-09, -8.7412744e-08, -6.181724e-08, 0.69631374, 0.71773756, 6.181724e-08, 0.71773756, -0.69631374, 4.3429337, 6.1534414, -1.8562274)
+
+[node name="OceanGenerator" type="Node3D" parent="." unique_id=1089128055]
+script = ExtResource("1_6p1gb")
+ocean_material = SubResource("ShaderMaterial_6p1gb")
+metadata/_custom_type_script = "uid://c4mx012ggauhw"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2106264239]
+transform = Transform3D(0.5207688, -0.7380121, 0.42911315, 0.14476243, 0.5717135, 0.80758125, -0.8413344, -0.3584437, 0.40456694, 0, 0, 0)
