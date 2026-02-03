@@ -2,12 +2,22 @@
 
 [ext_resource type="Script" uid="uid://c4mx012ggauhw" path="res://scripts/ocean_generator.gd" id="1_6p1gb"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6p1gb"]
+
+[sub_resource type="Sky" id="Sky_co4yx"]
+sky_material = SubResource("ProceduralSkyMaterial_6p1gb")
+
+[sub_resource type="Environment" id="Environment_58q5r"]
+background_mode = 2
+sky = SubResource("Sky_co4yx")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6p1gb"]
 
 [node name="GerstnerOcean" type="Node3D" unique_id=192684016]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2024993671]
-transform = Transform3D(-1, 1.3243632e-09, -8.7412744e-08, -6.181724e-08, 0.69631374, 0.71773756, 6.181724e-08, 0.71773756, -0.69631374, 4.3429337, 6.1534414, -1.8562274)
+transform = Transform3D(-1, 1.3243605e-09, -8.741274e-08, -3.477997e-08, 0.9113242, 0.41168934, 8.020657e-08, 0.41168934, -0.9113242, 4.3429337, 3.4643254, -3.1891866)
+environment = SubResource("Environment_58q5r")
 
 [node name="OceanGenerator" type="Node3D" parent="." unique_id=1089128055]
 script = ExtResource("1_6p1gb")
