@@ -1,21 +1,38 @@
 shader_type spatial;
 render_mode world_vertex_coords;
-uniform float amplitude = 1.0;
-uniform float angular_frequency = 1.0;
-uniform vec2 wave_vector = vec2(1.0, 0.0);
+
+const int WAVE_COUNT = 3;
+
+uniform float amp[WAVE_COUNT];
+uniform float ang_freq[WAVE_COUNT];
+uniform vec2 wave_dirs[WAVE_COUNT];
+uniform float wave_lens[WAVE_COUNT];
+uniform float phases[WAVE_COUNT];
 
 void vertex() {
-	// Called for every vertex the material is visible on.
-	float wp_dot = dot(wave_vector, VERTEX.xz);
-	vec2 xz = VERTEX.xz - normalize(wave_vector) *
-		amplitude *
-		sin(wp_dot - angular_frequency * TIME);
-	float y = amplitude * cos(wp_dot - angular_frequency * TIME);
-	VERTEX = vec3(xz.x, y, xz.y);
+	// This notation is confusing, but used in the tessendorf paper
+	// TLDR; x is a horizontal vector, y is the height offset
+	vec2 x = VERTEX.xz;
+	float y = 0.0f;
+
+	for (int i = 0; i < WAVE_COUNT; i++)
+	{
+		if (amp[i] <= 0.0f)
+			continue;
+
+		vec2 wave_dir_norm = normalize(wave_dirs[i]);
+		vec2 wave_vec = wave_dir_norm * wave_lens[i];
+
+		float theta = dot(wave_vec, VERTEX.xz) - ang_freq[i] * TIME + phases[i];
+		x -= wave_dir_norm * amp[i] * sin(theta);
+		y += amp[i] * cos(theta);
+	}
+
+	VERTEX = vec3(x.x, y, x.y);
 }
 
 void fragment() {
-	// Called for every pixel the material is visible on.
+	ALBEDO = vec3(0.0f, 0.0f, 1.0f);
 }
 
 //void light() {

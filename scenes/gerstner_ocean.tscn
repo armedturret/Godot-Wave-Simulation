@@ -12,16 +12,18 @@ background_mode = 2
 sky = SubResource("Sky_co4yx")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d0soh"]
-size = Vector2(50, 50)
-subdivide_width = 64
-subdivide_depth = 64
+size = Vector2(100, 100)
+subdivide_width = 128
+subdivide_depth = 128
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_co4yx"]
 render_priority = 0
 shader = ExtResource("1_6p1gb")
-shader_parameter/amplitude = 1.0
-shader_parameter/angular_frequency = 2.0
-shader_parameter/wave_vector = Vector2(1, 0)
+shader_parameter/amp = PackedFloat32Array(1, 1, 0.25)
+shader_parameter/ang_freq = PackedFloat32Array(1, 1.5, 0.75)
+shader_parameter/wave_dirs = PackedVector2Array(0.75, 0.25, -1, 0.35, 0.34, 0.785)
+shader_parameter/wave_lens = PackedFloat32Array(1, 0.14, 0.5)
+shader_parameter/phases = PackedFloat32Array(0, 0, 0)
 
 [node name="GerstnerOcean" type="Node3D" unique_id=192684016]
 
