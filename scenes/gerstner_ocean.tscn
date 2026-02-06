@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://di60ffgcypgw4"]
 
 [ext_resource type="Shader" uid="uid://csfe4if7i3y3p" path="res://shaders/ocean_gerstner.gdshader" id="1_6p1gb"]
+[ext_resource type="Script" uid="uid://c4mx012ggauhw" path="res://scripts/ocean_generator.gd" id="2_co4yx"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6p1gb"]
 
@@ -19,10 +20,11 @@ subdivide_depth = 128
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_co4yx"]
 render_priority = 0
 shader = ExtResource("1_6p1gb")
-shader_parameter/amp = PackedFloat32Array(0.5, 0.2, 0.4)
-shader_parameter/wave_dirs = PackedVector2Array(0.75, 0.25, -1, 0.35, 0.34, 0.785)
-shader_parameter/wave_lens = PackedFloat32Array(15, 16, 26)
-shader_parameter/phases = PackedFloat32Array(0, 0, 0)
+shader_parameter/steepness = 1.0
+shader_parameter/amp = Array[float]([0.4437636004489336, 0.06413220906365907, 1.6180400420280874, 0.4611334685674169, 0.35893002984344474, 0.06443476164841837, 0.24820600902784148, 0.2933877392975073, 0.8675108103028403, 0.06961184519666981, 1.1463993460003188, 0.17760611327848122])
+shader_parameter/wave_dirs = Array[Vector2]([Vector2(-0.99771625, 0.067545064), Vector2(0.52725536, -0.8497069), Vector2(-0.93781066, -0.34714714), Vector2(0.97400266, 0.22653651), Vector2(0.9952537, -0.09731447), Vector2(0.8339109, 0.55189914), Vector2(-0.9075266, 0.41999462), Vector2(-0.19287513, -0.9812233), Vector2(0.7263825, -0.68729067), Vector2(-0.4644083, 0.8856212), Vector2(0.40437952, 0.91459125), Vector2(-0.91199976, 0.41019076)])
+shader_parameter/wave_lens = Array[float]([34.08199127822818, 33.6250440105166, 24.922109613871168, 16.000895579645764, 6.538894623230923, 25.41802922210864, 6.881591387179452, 9.251639762407406, 19.70649947624646, 7.113763629123354, 30.508933978786217, 2.7630469428564])
+shader_parameter/phases = Array[float]([5.655010137517295, 3.6819646837171907, 3.064216773006802, 3.3004165912647934, 4.350748508090885, 0.34930140041385543, 6.19341231190276, 2.8395780719728445, 0.49700733403793634, 4.063785945483484, 2.8555625249563557, 3.3421524348184657])
 
 [node name="GerstnerOcean" type="Node3D" unique_id=192684016]
 
@@ -37,3 +39,5 @@ transform = Transform3D(0.5207688, -0.7380121, 0.42911315, 0.14476243, 0.5717135
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4687395, 0, 5.482691)
 mesh = SubResource("PlaneMesh_d0soh")
 surface_material_override/0 = SubResource("ShaderMaterial_co4yx")
+script = ExtResource("2_co4yx")
+max_wavelen = 35.0

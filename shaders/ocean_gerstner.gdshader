@@ -1,8 +1,10 @@
 shader_type spatial;
 render_mode world_vertex_coords;
 
-const int WAVE_COUNT = 3;
+const int WAVE_COUNT = 12;
 const float G = 9.8f;
+
+uniform float steepness : hint_range(0.001, 1.0, 0.001);
 
 uniform float amp[WAVE_COUNT];
 uniform vec2 wave_dirs[WAVE_COUNT];
@@ -15,6 +17,14 @@ void vertex() {
 	vec2 x = VERTEX.xz;
 	float y = 0.0f;
 
+	float total_ka = 0.0f;
+	for (int i = 0; i < WAVE_COUNT; i++)
+	{
+		float k = 2.0f * PI / wave_lens[i];
+		total_ka += k * amp[i];
+	}
+	float steepness_coeff = steepness / total_ka;
+
 	for (int i = 0; i < WAVE_COUNT; i++)
 	{
 		if (amp[i] <= 0.0f)
@@ -26,7 +36,7 @@ void vertex() {
 		vec2 wave_vec = wave_dir_norm * k;
 
 		float theta = dot(wave_vec, VERTEX.xz) - ang_freq * TIME + phases[i];
-		x -= wave_dir_norm * amp[i] * sin(theta);
+		x -= wave_dir_norm * steepness_coeff * amp[i] * sin(theta);
 		y += amp[i] * cos(theta);
 	}
 
