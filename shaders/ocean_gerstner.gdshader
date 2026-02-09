@@ -17,6 +17,7 @@ void vertex() {
 	vec2 x = VERTEX.xz;
 	float y = 0.0f;
 
+	// Calculate Qi
 	float total_ka = 0.0f;
 	for (int i = 0; i < WAVE_COUNT; i++)
 	{
@@ -25,6 +26,7 @@ void vertex() {
 	}
 	float steepness_coeff = steepness / total_ka;
 
+		// Calculate the vertex position
 	for (int i = 0; i < WAVE_COUNT; i++)
 	{
 		if (amp[i] <= 0.0f)
@@ -35,12 +37,27 @@ void vertex() {
 		float ang_freq = sqrt(k * G);
 		vec2 wave_vec = wave_dir_norm * k;
 
-		float theta = dot(wave_vec, VERTEX.xz) - ang_freq * TIME + phases[i];
-		x -= wave_dir_norm * steepness_coeff * amp[i] * sin(theta);
-		y += amp[i] * cos(theta);
+		float theta = dot(wave_vec, VERTEX.xz) + ang_freq * TIME + phases[i];
+		x += wave_dir_norm * steepness_coeff * amp[i] * cos(theta);
+		y += amp[i] * sin(theta);
+	}
+
+	// Need to calculate norm AFTER finding location
+	vec3 norm_sum = vec3(0.0f, 1.0f, 0.0f);
+	for (int i = 0; i < WAVE_COUNT; i ++)
+	{
+		vec2 wave_dir_norm = normalize(wave_dirs[i]);
+		float k = 2.0f * PI / wave_lens[i];
+		float ang_freq = sqrt(k * G);
+
+		// Calculate the normal components
+		float norm_theta = dot(k * wave_dir_norm, x) + ang_freq * TIME + phases[i];
+		norm_sum.xz -= wave_dir_norm * amp[i] * k * cos(norm_theta);
+		norm_sum.y -= steepness_coeff * amp[i] * k * sin(norm_theta);
 	}
 
 	VERTEX = vec3(x.x, y, x.y);
+	NORMAL = normalize(norm_sum);
 }
 
 void fragment() {
