@@ -4,12 +4,21 @@ render_mode world_vertex_coords;
 const int WAVE_COUNT = 12;
 const float G = 9.8f;
 
+group_uniforms WaveParams;
 uniform float steepness : hint_range(0.001, 1.0, 0.001);
 
+group_uniforms WaveArrays;
 uniform float amp[WAVE_COUNT];
 uniform vec2 wave_dirs[WAVE_COUNT];
 uniform float wave_lens[WAVE_COUNT];
 uniform float phases[WAVE_COUNT];
+
+group_uniforms VisualSettings;
+uniform vec3 albedo : source_color = vec3(1.0f);
+uniform float alpha = 1.0f;
+uniform float roughness = 0.0f;
+uniform float metallic = 0.0f;
+
 
 void vertex() {
 	// This notation is confusing, but used in the tessendorf paper
@@ -61,7 +70,10 @@ void vertex() {
 }
 
 void fragment() {
-	ALBEDO = vec3(0.0f, 0.0f, 1.0f);
+	ALBEDO = albedo;
+	ALPHA = alpha;
+	ROUGHNESS = roughness;
+	METALLIC = metallic;
 }
 
 //void light() {

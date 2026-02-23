@@ -6,6 +6,8 @@ class_name OceanGenerator
 @export var wave_count: int = 12
 @export var min_wavelen: float = 1.0
 @export var max_wavelen: float = 50.0
+@export var min_amplitude: float = 0.1
+@export var max_amplitude: float = 0.5
 
 @export_tool_button("Generate Ocean Params", "Path3D")
 var generate_ocean_tool_button: Callable = regenerate_ocean_params
@@ -26,9 +28,7 @@ func regenerate_ocean_params() -> void:
 		# Cap for now
 		var wave_len := randf_range(min_wavelen, max_wavelen)
 		var wave_dir := randf_range(0, 2.0 * PI)
-		var k := 2 * PI / wave_len
-		var max_amp := 1.0 / k
-		var amp := randf_range(0.001 * max_amp, max_amp * 0.5)
+		var amp := randf_range(min_amplitude, max_amplitude)
 		amplitudes.append(amp)
 		wave_dirs.append(Vector2(cos(wave_dir), sin(wave_dir)))
 		wave_lens.append(wave_len)
