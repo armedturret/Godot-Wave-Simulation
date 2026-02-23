@@ -26,3 +26,7 @@ gdscript/warnings/untyped_declaration=2
 [dotnet]
 
 project/assembly_name="Wave Simulation"
+
+[rendering]
+
+environment/defaults/default_environment="uid://dkj3u4715d0e1"

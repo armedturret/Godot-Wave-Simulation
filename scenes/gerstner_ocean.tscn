@@ -1,16 +1,8 @@
 [gd_scene format=3 uid="uid://di60ffgcypgw4"]
 
+[ext_resource type="Environment" uid="uid://dkj3u4715d0e1" path="res://environment.tres" id="1_58q5r"]
 [ext_resource type="Material" uid="uid://c1vjmg5gwatjd" path="res://materials/ocean_material.tres" id="1_co4yx"]
 [ext_resource type="Script" uid="uid://c4mx012ggauhw" path="res://scripts/ocean_generator.gd" id="2_co4yx"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6p1gb"]
-
-[sub_resource type="Sky" id="Sky_co4yx"]
-sky_material = SubResource("ProceduralSkyMaterial_6p1gb")
-
-[sub_resource type="Environment" id="Environment_58q5r"]
-background_mode = 2
-sky = SubResource("Sky_co4yx")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d0soh"]
 size = Vector2(100, 100)
@@ -19,12 +11,14 @@ subdivide_depth = 256
 
 [node name="GerstnerOcean" type="Node3D" unique_id=192684016]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1103050431]
+environment = ExtResource("1_58q5r")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2024993671]
-transform = Transform3D(0.99964863, -0.010913228, 0.024157835, -3.4779973e-08, 0.91132426, 0.41168937, -0.02650848, -0.4115447, 0.911004, 4.3429337, 10.378669, 60.556053)
-environment = SubResource("Environment_58q5r")
+transform = Transform3D(0.99964863, -0.010913228, 0.024157835, -3.4779973e-08, 0.91132426, 0.41168937, -0.02650848, -0.4115447, 0.911004, 4.3429337, 17.249245, 60.556053)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2106264239]
-transform = Transform3D(0.8531412, 2.280336e-08, -0.52168006, 0.52167994, -3.729199e-08, 0.8531413, -1.2442647e-15, -1, -4.3711402e-08, 0, 30.442127, 0)
+transform = Transform3D(0.8987864, -1.9162492e-08, 0.43838686, -0.43838686, -3.9287194e-08, 0.8987865, -1.4048137e-16, -1, -4.3711374e-08, 0, 30.442127, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1303851496]
 transform = Transform3D(0.99998915, -0.0037763077, -0.0027200247, 0.0037769545, 0.99999285, 0.00023294859, 0.0027191264, -0.00024321013, 0.9999963, 0, 0, 0)
