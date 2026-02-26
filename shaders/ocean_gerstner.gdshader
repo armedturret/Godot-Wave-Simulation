@@ -15,8 +15,8 @@ uniform float phases[WAVE_COUNT];
 
 group_uniforms VisualSettings;
 uniform vec3 albedo : source_color = vec3(1.0f);
-uniform float roughness = 0.0f;
-uniform float metallic = 0.0f;
+uniform float roughness : hint_range(0, 1) = 0.0f;
+uniform float metallic : hint_range(0, 1) = 0.0f;
 
 
 void vertex() {
@@ -72,6 +72,7 @@ void fragment() {
 	ALBEDO = albedo;
 	ROUGHNESS = roughness;
 	METALLIC = metallic;
+	SPECULAR = 0.5f;
 }
 
 //void light() {

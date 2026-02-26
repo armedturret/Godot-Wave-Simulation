@@ -4,9 +4,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3c6y5"]
 shader = ExtResource("1_0wybp")
-shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
-shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
-shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/day_top_color = Color(0, 0.35970175, 0.6256097, 1)
+shader_parameter/day_bottom_color = Color(5.968213e-06, 0.6624939, 0.8954568, 1)
+shader_parameter/sunset_top_color = Color(0.69202214, 0.7401569, 1, 1)
 shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
 shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
 shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
@@ -23,7 +23,7 @@ shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
 shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
 shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
 shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
-shader_parameter/clouds_speed = 2.0
+shader_parameter/clouds_speed = 1.999999955296
 shader_parameter/clouds_direction = 0.2
 shader_parameter/clouds_scale = 1.0
 shader_parameter/clouds_cutoff = 0.3
@@ -41,3 +41,4 @@ background_mode = 2
 sky = SubResource("Sky_co4yx")
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 2
