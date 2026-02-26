@@ -15,7 +15,6 @@ uniform float phases[WAVE_COUNT];
 
 group_uniforms VisualSettings;
 uniform vec3 albedo : source_color = vec3(1.0f);
-uniform float alpha = 1.0f;
 uniform float roughness = 0.0f;
 uniform float metallic = 0.0f;
 
@@ -71,7 +70,6 @@ void vertex() {
 
 void fragment() {
 	ALBEDO = albedo;
-	ALPHA = alpha;
 	ROUGHNESS = roughness;
 	METALLIC = metallic;
 }
