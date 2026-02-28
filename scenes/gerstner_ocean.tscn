@@ -6,8 +6,8 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d0soh"]
 size = Vector2(100, 100)
-subdivide_width = 128
-subdivide_depth = 128
+subdivide_width = 256
+subdivide_depth = 256
 
 [node name="GerstnerOcean" type="Node3D" unique_id=192684016]
 
@@ -18,7 +18,7 @@ environment = ExtResource("1_58q5r")
 transform = Transform3D(0.99964863, -0.010913228, 0.024157835, -3.4779973e-08, 0.91132426, 0.41168937, -0.02650848, -0.4115447, 0.911004, 4.3429337, 17.249245, 60.556053)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2106264239]
-transform = Transform3D(0.76308566, -0.52836424, 0.3721982, -0.43838683, -3.9287194e-08, 0.89878637, -0.4748866, -0.8490178, -0.23162799, 0, 30.442127, 0)
+transform = Transform3D(0.76308566, -0.5283642, 0.3721982, -0.5328818, -0.18850322, 0.8249264, -0.36570105, -0.8278271, -0.42539975, 0, 30.442127, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1303851496]
 transform = Transform3D(0.99998915, -0.0037763077, -0.0027200247, 0.0037769545, 0.99999285, 0.00023294859, 0.0027191264, -0.00024321013, 0.9999963, -0.024202347, -0.0163908, 0.0016489029)
