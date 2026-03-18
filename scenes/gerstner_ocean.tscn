@@ -2,6 +2,7 @@
 
 [ext_resource type="Environment" uid="uid://dkj3u4715d0e1" path="res://environment.tres" id="1_58q5r"]
 [ext_resource type="Material" uid="uid://c1vjmg5gwatjd" path="res://materials/ocean_material.tres" id="1_co4yx"]
+[ext_resource type="Script" uid="uid://d4g016li4ktxm" path="res://scripts/camera_controller.gd" id="2_3c6y5"]
 [ext_resource type="Script" uid="uid://c4mx012ggauhw" path="res://scripts/ocean_generator.gd" id="2_co4yx"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_d0soh"]
@@ -16,6 +17,10 @@ environment = ExtResource("1_58q5r")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2024993671]
 transform = Transform3D(0.99964863, -0.010913228, 0.024157835, -3.4779973e-08, 0.91132426, 0.41168937, -0.02650848, -0.4115447, 0.911004, 4.3429337, 17.249245, 60.556053)
+script = ExtResource("2_3c6y5")
+speed = 10.0
+speed_fast = 25.0
+mouse_sens = 0.01
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2106264239]
 transform = Transform3D(0.76308566, -0.5283642, 0.3721982, -0.5328818, -0.18850322, 0.8249264, -0.36570105, -0.8278271, -0.42539975, 0, 30.442127, 0)
