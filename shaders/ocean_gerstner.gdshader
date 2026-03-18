@@ -6,6 +6,8 @@ const float G = 9.8f;
 
 group_uniforms WaveParams;
 uniform float steepness : hint_range(0.001, 1.0, 0.001);
+uniform sampler2D noise : hint_default_black;
+uniform float noise_scale : hint_range(0.0, 10.0, 0.01) = 0.0f;
 
 group_uniforms WaveArrays;
 uniform float amp[WAVE_COUNT];
@@ -27,6 +29,9 @@ void vertex() {
 	// TLDR; x is a horizontal vector, y is the height offset
 	vec2 x = VERTEX.xz;
 	float y = 0.0f;
+    // noise works by giving each vertex a "time" offset
+    float t_off = texture(noise, UV).r;
+    float t = TIME + noise_scale * t_off;
 
 	// Calculate Qi
 	float total_ka = 0.0f;
@@ -50,7 +55,7 @@ void vertex() {
 		float ang_freq = sqrt(k * G);
 		vec2 wave_vec = wave_dir_norm * k;
 
-		float theta = dot(wave_vec, VERTEX.xz) + ang_freq * TIME + phases[i];
+		float theta = dot(wave_vec, VERTEX.xz) + ang_freq * t + phases[i];
 		x += wave_dir_norm * steepness_coeff * amp[i] * cos(theta);
 		y += amp[i] * sin(theta);
 		min_amp -= amp[i];
@@ -66,14 +71,14 @@ void vertex() {
 		float ang_freq = sqrt(k * G);
 
 		// Calculate the normal components
-		float norm_theta = dot(k * wave_dir_norm, x) + ang_freq * TIME + phases[i];
+		float norm_theta = dot(k * wave_dir_norm, x) + ang_freq * t + phases[i];
 		norm_sum.xz -= wave_dir_norm * amp[i] * k * cos(norm_theta);
 		norm_sum.y -= steepness_coeff * amp[i] * k * sin(norm_theta);
 	}
 
 	VERTEX = vec3(x.x, y, x.y);
 	NORMAL = normalize(norm_sum);
-	
+    
 	height_percent = (y - min_amp) / (max_amp - min_amp);
 }
 
