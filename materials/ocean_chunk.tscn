@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cgjwhgxftp8uu"]
+
+[ext_resource type="PlaneMesh" uid="uid://cxyic7ot1h8ob" path="res://ocean_meshes/ocean_mesh_256.tres" id="1_bxhx6"]
+[ext_resource type="Material" uid="uid://c1vjmg5gwatjd" path="res://materials/ocean_material.tres" id="2_dhjj7"]
+
+[node name="OceanChunk" type="MeshInstance3D" unique_id=1085945652]
+transform = Transform3D(0.99998915, -0.0037763077, -0.0027200247, 0.0037769545, 0.99999285, 0.00023294859, 0.0027191264, -0.00024321013, 0.9999963, 0, 0, 0)
+custom_aabb = AABB(-50, 0, -50, 100, 1, 100)
+mesh = ExtResource("1_bxhx6")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("2_dhjj7")
