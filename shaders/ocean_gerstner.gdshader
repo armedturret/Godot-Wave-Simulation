@@ -8,6 +8,7 @@ group_uniforms WaveParams;
 uniform float steepness : hint_range(0.001, 1.0, 0.001);
 uniform sampler2D noise : hint_default_black;
 uniform float noise_scale : hint_range(0.0, 10.0, 0.01) = 0.0f;
+uniform float uv_to_world_ratio = 100.0f;
 
 group_uniforms WaveArrays;
 uniform float amp[WAVE_COUNT];
@@ -30,7 +31,7 @@ void vertex() {
 	vec2 x = VERTEX.xz;
 	float y = 0.0f;
     // noise works by giving each vertex a "time" offset
-    float t_off = texture(noise, UV).r;
+    float t_off = texture(noise, VERTEX.xz / uv_to_world_ratio).r;
     float t = TIME + noise_scale * t_off;
 
 	// Calculate Qi

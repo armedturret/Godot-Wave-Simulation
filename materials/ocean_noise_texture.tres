@@ -2,7 +2,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_usqsq"]
 noise_type = 4
-frequency = 0.1
+frequency = 1.0
 
 [resource]
 noise = SubResource("FastNoiseLite_usqsq")
