@@ -23,6 +23,7 @@ uniform float roughness : hint_range(0, 1) = 0.0f;
 uniform float metallic : hint_range(0, 1) = 0.0f;
 
 varying float height_percent;
+varying float foam_percent;
 
 void vertex() {
 	// This notation is confusing, but used in the tessendorf paper
@@ -44,7 +45,7 @@ void vertex() {
 	float max_amp = 0.0f;
 	float min_amp = 0.0f;
 
-		// Calculate the vertex position
+	// Calculate the vertex position
 	for (int i = 0; i < WAVE_COUNT; i++)
 	{
 		if (amp[i] <= 0.0f)
@@ -64,6 +65,7 @@ void vertex() {
 
 	// Need to calculate norm AFTER finding location
 	vec3 norm_sum = vec3(0.0f, 1.0f, 0.0f);
+	float norm_vert_unsteep = 1.0f;
 	for (int i = 0; i < WAVE_COUNT; i ++)
 	{
 		vec2 wave_dir_norm = normalize(wave_dirs[i]);
@@ -74,16 +76,27 @@ void vertex() {
 		float norm_theta = dot(k * wave_dir_norm, x) + ang_freq * t + phases[i];
 		norm_sum.xz -= wave_dir_norm * amp[i] * k * cos(norm_theta);
 		norm_sum.y -= steepness_coeff * amp[i] * k * sin(norm_theta);
+		norm_vert_unsteep -= amp[i] * k * sin(norm_theta);
 	}
 
 	VERTEX = vec3(x.x, y, x.y);
 	NORMAL = normalize(norm_sum);
-    
+	
 	height_percent = (y - min_amp) / (max_amp - min_amp);
+	
+	// foam calculations
+    if (norm_vert_unsteep < 0.0f)
+		foam_percent = 1.0f;
+	else
+		foam_percent = 0.0f;
 }
 
 void fragment() {
 	ALBEDO = height_percent * max_albedo + (1.0f - height_percent) * min_albedo;
+	
+	if (foam_percent > 0.0f)
+		ALBEDO = vec3(1.0f, 1.0f, 1.0f);
+	
 	ROUGHNESS = roughness;
 	METALLIC = metallic;
 }

@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://biql4pnagesp2"]
+
+[ext_resource type="Shader" uid="uid://csfe4if7i3y3p" path="res://shaders/ocean_gerstner.gdshader" id="1_be1w7"]
+[ext_resource type="Texture2D" uid="uid://c75fkvdhwim83" path="res://materials/ocean_noise_texture.tres" id="2_h0um1"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_be1w7")
+shader_parameter/steepness = 1.0
+shader_parameter/noise = ExtResource("2_h0um1")
+shader_parameter/noise_scale = 0.0
+shader_parameter/uv_to_world_ratio = 100.0
+shader_parameter/amp = Array[float]([2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+shader_parameter/wave_dirs = Array[Vector2]([Vector2(1, 0), Vector2(0.2364311, -0.9716483), Vector2(-0.5412645, 0.8408524), Vector2(-0.3620322, -0.93216556), Vector2(-0.8528486, -0.52215827), Vector2(-0.7798484, 0.6259684), Vector2(-0.54174775, 0.8405411), Vector2(0.26253957, -0.96492124), Vector2(-0.11122434, 0.99379534), Vector2(-0.9518592, -0.3065357), Vector2(-0.37589753, -0.92666125), Vector2(0.99999857, -0.0016764323)])
+shader_parameter/wave_lens = Array[float]([12.0, 23.219693929001433, 1.2666883849112474, 17.610348165351297, 46.890830374051724, 35.718990397283534, 21.795770482534497, 13.448726617423809, 25.400638200532327, 32.156122974152176, 49.85399647785867, 9.389875387138705])
+shader_parameter/phases = Array[float]([0.7738933509039786, 6.180909822885501, 6.003488216855375, 2.0458023589125434, 4.446460879931826, 0.1088860810545152, 0.879269745444537, 4.5357289632726685, 4.403049169430493, 2.97307525668873, 4.129641631410134, 1.802077522284779])
+shader_parameter/max_albedo = Color(0.34706634, 0.64896065, 0.9999928, 1)
+shader_parameter/min_albedo = Color(0, 0.40516204, 0.7618961, 1)
+shader_parameter/roughness = 0.5010000237975
+shader_parameter/metallic = 0.5550000263625
