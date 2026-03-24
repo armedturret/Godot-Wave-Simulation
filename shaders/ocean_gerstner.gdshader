@@ -21,7 +21,6 @@ uniform vec3 max_albedo : source_color = vec3(1.0f);
 uniform vec3 min_albedo : source_color = vec3(1.0f);
 uniform float roughness : hint_range(0, 1) = 0.0f;
 uniform float metallic : hint_range(0, 1) = 0.0f;
-uniform float alpha : hint_range(0, 1) = 0.0f;
 
 varying float height_percent;
 
@@ -87,7 +86,6 @@ void fragment() {
 	ALBEDO = height_percent * max_albedo + (1.0f - height_percent) * min_albedo;
 	ROUGHNESS = roughness;
 	METALLIC = metallic;
-	ALPHA = alpha;
 }
 
 //void light() {

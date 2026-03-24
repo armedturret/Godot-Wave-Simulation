@@ -16,8 +16,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	position.x = camera.position.x
-	position.z = camera.position.z
+	position.x = snappedf(camera.position.x, chunk_size)
+	position.z = snappedf(camera.position.z, chunk_size)
 	if abs(camera.position.y - last_camera_pos.y) > recalc_distance:
 		recalculate_lod()
 
