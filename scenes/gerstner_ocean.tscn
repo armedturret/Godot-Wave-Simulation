@@ -47,9 +47,6 @@ template = ExtResource("4_3c6y5")
 max_chunk_dist = 32
 recalc_distance = 50.0
 
-[node name="MeshInstance3D" parent="OceanRoot" unique_id=1085945652 instance=ExtResource("4_3c6y5")]
-transform = Transform3D(0.9999891, -0.0037763072, -0.0027200258, 0.0037769545, 0.99999285, 0.00023293924, 0.0027191262, -0.00024321015, 0.9999963, 0, 0, 0)
-
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2024993671]
 transform = Transform3D(0.99964863, -0.010913228, 0.024157835, -3.4779973e-08, 0.91132426, 0.41168937, -0.02650848, -0.4115447, 0.911004, 4.3429337, 17.249245, 60.556053)
 far = 2000.0
