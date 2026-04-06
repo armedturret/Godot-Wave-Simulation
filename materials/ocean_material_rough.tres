@@ -1,0 +1,24 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://biql4pnagesp2"]
+
+[ext_resource type="Shader" uid="uid://csfe4if7i3y3p" path="res://shaders/ocean_gerstner.gdshader" id="1_na7y4"]
+[ext_resource type="Texture2D" uid="uid://d3qna6v86wka0" path="res://materials/foam_tex.png" id="2_2tble"]
+[ext_resource type="Texture2D" uid="uid://c75fkvdhwim83" path="res://materials/ocean_noise_texture.tres" id="3_2g6xc"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_na7y4")
+shader_parameter/steepness = 1.0
+shader_parameter/noise = ExtResource("3_2g6xc")
+shader_parameter/noise_scale = 0.0
+shader_parameter/uv_to_world_ratio = 100.0
+shader_parameter/foam = ExtResource("2_2tble")
+shader_parameter/foam_start = 0.3
+shader_parameter/foam_full = 0.0
+shader_parameter/amp = Array[float]([0.505956534265539, 1.5, 0.8, 0.9, 1.8, 0.6, 0.189, 0.732, 0.468, 1.5, 0.2, 0.5403166345277984])
+shader_parameter/wave_dirs = Array[Vector2]([Vector2(-0.99774665, 0.06709453), Vector2(-0.402, 0.416), Vector2(0.7458835, 0.66607636), Vector2(0.661, 0.75), Vector2(-0.92211723, -0.38691062), Vector2(0.77674264, 0.62981814), Vector2(0.6749994, 0.73781824), Vector2(0.9989588, 0.045621403), Vector2(-0.83387864, 0.55194783), Vector2(-0.91392505, -0.40588304), Vector2(-0.5077876, -0.8614823), Vector2(0.8277782, 0.5610554)])
+shader_parameter/wave_lens = Array[float]([31.18668857046974, 49.283168973950815, 21.76871136023358, 13.940258841245909, 19.520693072789676, 22.640627787916777, 7.0, 33.75511833116773, 11.075623075636074, 35.84603714066714, 30.74457803060322, 18.066498410119298])
+shader_parameter/phases = Array[float]([2.57948927590004, 4.296579869281454, 5.591291007287704, 2.948628380434477, 2.6391094753296027, 2.010005072531214, 0.31289123172782896, 1.8127945457767867, 6.080621689507597, 5.000512905080933, 2.527038737494476, 2.733947453247491])
+shader_parameter/max_albedo = Color(0, 0.52720785, 0.98741776, 1)
+shader_parameter/min_albedo = Color(0, 0.24617967, 0.48038316, 1)
+shader_parameter/roughness = 0.5010000237975
+shader_parameter/metallic = 0.5550000263625

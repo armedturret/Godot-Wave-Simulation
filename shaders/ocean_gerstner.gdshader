@@ -9,6 +9,9 @@ uniform float steepness : hint_range(0.001, 1.0, 0.001);
 uniform sampler2D noise : hint_default_black;
 uniform float noise_scale : hint_range(0.0, 10.0, 0.01) = 0.0f;
 uniform float uv_to_world_ratio = 100.0f;
+uniform sampler2D foam : hint_default_white;
+uniform float foam_start = 0.2f;
+uniform float foam_full = 0.0f;
 
 group_uniforms WaveArrays;
 uniform float amp[WAVE_COUNT];
@@ -23,15 +26,17 @@ uniform float roughness : hint_range(0, 1) = 0.0f;
 uniform float metallic : hint_range(0, 1) = 0.0f;
 
 varying float height_percent;
-varying float foam_percent;
+varying float norm_vert_unsteep;
+varying vec2 uv_calculated;
 
 void vertex() {
 	// This notation is confusing, but used in the tessendorf paper
 	// TLDR; x is a horizontal vector, y is the height offset
 	vec2 x = VERTEX.xz;
 	float y = 0.0f;
+	uv_calculated = VERTEX.xz / uv_to_world_ratio;
     // noise works by giving each vertex a "time" offset
-    float t_off = texture(noise, VERTEX.xz / uv_to_world_ratio).r;
+    float t_off = texture(noise, uv_calculated).r;
     float t = TIME + noise_scale * t_off;
 
 	// Calculate Qi
@@ -65,7 +70,7 @@ void vertex() {
 
 	// Need to calculate norm AFTER finding location
 	vec3 norm_sum = vec3(0.0f, 1.0f, 0.0f);
-	float norm_vert_unsteep = 1.0f;
+	norm_vert_unsteep = 1.0f;
 	for (int i = 0; i < WAVE_COUNT; i ++)
 	{
 		vec2 wave_dir_norm = normalize(wave_dirs[i]);
@@ -84,18 +89,22 @@ void vertex() {
 	
 	height_percent = (y - min_amp) / (max_amp - min_amp);
 	
-	// foam calculations
-    if (norm_vert_unsteep < 0.0f)
-		foam_percent = 1.0f;
-	else
-		foam_percent = 0.0f;
+	
+    
 }
 
 void fragment() {
 	ALBEDO = height_percent * max_albedo + (1.0f - height_percent) * min_albedo;
 	
+	// foam calculations
+	float foam_percent = 0.0f;
+	if (norm_vert_unsteep < foam_full)
+		foam_percent = 1.0f;
+	else if (norm_vert_unsteep < foam_start)
+		foam_percent = 1.0f - smoothstep(foam_full, foam_start, norm_vert_unsteep);
+		
 	if (foam_percent > 0.0f)
-		ALBEDO = vec3(1.0f, 1.0f, 1.0f);
+		ALBEDO = mix(ALBEDO, vec3(1.0f), texture(foam, uv_calculated).r * foam_percent);
 	
 	ROUGHNESS = roughness;
 	METALLIC = metallic;

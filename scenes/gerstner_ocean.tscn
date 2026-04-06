@@ -3,14 +3,12 @@
 [ext_resource type="Environment" uid="uid://dkj3u4715d0e1" path="res://environment.tres" id="1_58q5r"]
 [ext_resource type="Script" uid="uid://d4g016li4ktxm" path="res://scripts/camera_controller.gd" id="2_3c6y5"]
 [ext_resource type="Script" uid="uid://u656r0b5mydt" path="res://scripts/ocean_lod.gd" id="3_82v64"]
-[ext_resource type="PackedScene" uid="uid://cgjwhgxftp8uu" path="res://scenes/ocean_chunk.tscn" id="4_3c6y5"]
 [ext_resource type="Script" uid="uid://ci3p2rtj3liu8" path="res://scripts/ocean_lod_level.gd" id="4_iqywx"]
 [ext_resource type="PlaneMesh" uid="uid://bsjqetf36cm1w" path="res://ocean_meshes/ocean_mesh_128.tres" id="6_5d2jk"]
 [ext_resource type="PlaneMesh" uid="uid://504n75u3e24s" path="res://ocean_meshes/ocean_mesh_64.tres" id="7_drgyt"]
+[ext_resource type="PackedScene" uid="uid://ym36a6x4qw4w" path="res://scenes/ocean_chunk_rough.tscn" id="8_6cjee"]
 [ext_resource type="PlaneMesh" uid="uid://cg21olxpce28j" path="res://ocean_meshes/ocean_mesh_32.tres" id="8_iqywx"]
-[ext_resource type="Material" uid="uid://biql4pnagesp2" path="res://materials/ocean_material_rough_test.tres" id="9_cxc0e"]
 [ext_resource type="PlaneMesh" uid="uid://c8k7q4yej68ce" path="res://ocean_meshes/ocean_mesh_16.tres" id="9_drgyt"]
-[ext_resource type="Script" uid="uid://c4mx012ggauhw" path="res://scripts/ocean_generator.gd" id="9_iqywx"]
 
 [sub_resource type="Resource" id="Resource_cxc0e"]
 script = ExtResource("4_iqywx")
@@ -45,15 +43,9 @@ transform = Transform3D(0.9999999, -1.8626451e-09, 1.8626451e-09, 0, 1, 0, 0, -5
 script = ExtResource("3_82v64")
 camera = NodePath("../Camera3D")
 lods = Array[ExtResource("4_iqywx")]([SubResource("Resource_cxc0e"), SubResource("Resource_5d2jk"), SubResource("Resource_igkwb"), SubResource("Resource_3pl04")])
-template = ExtResource("4_3c6y5")
+template = ExtResource("8_6cjee")
 max_chunk_dist = 32
 recalc_distance = 50.0
-
-[node name="OceanChunk" parent="OceanRoot" unique_id=1085945652 instance=ExtResource("4_3c6y5")]
-surface_material_override/0 = ExtResource("9_cxc0e")
-script = ExtResource("9_iqywx")
-min_amplitude = 0.0
-max_amplitude = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2024993671]
 transform = Transform3D(0.99964863, -0.010913228, 0.024157835, -3.4779973e-08, 0.91132426, 0.41168937, -0.02650848, -0.4115447, 0.911004, 4.3429337, 17.249245, 60.556053)
