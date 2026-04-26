@@ -86,28 +86,29 @@ void vertex() {
 
 	VERTEX = vec3(x.x, y, x.y);
 	NORMAL = normalize(norm_sum);
-	
+
 	height_percent = (y - min_amp) / (max_amp - min_amp);
-	
-	
-    
+
+
+
 }
 
 void fragment() {
 	ALBEDO = height_percent * max_albedo + (1.0f - height_percent) * min_albedo;
-	
+
 	// foam calculations
 	float foam_percent = 0.0f;
 	if (norm_vert_unsteep < foam_full)
 		foam_percent = 1.0f;
 	else if (norm_vert_unsteep < foam_start)
 		foam_percent = 1.0f - smoothstep(foam_full, foam_start, norm_vert_unsteep);
-		
+
 	if (foam_percent > 0.0f)
-		ALBEDO = mix(ALBEDO, vec3(1.0f), texture(foam, uv_calculated).r * foam_percent);
-	
-	ROUGHNESS = roughness;
-	METALLIC = metallic;
+		foam_percent = texture(foam, uv_calculated).r * foam_percent;
+		ALBEDO = mix(ALBEDO, vec3(1.0f), foam_percent);
+
+	ROUGHNESS = (1.0f - foam_percent) * roughness + foam_percent;
+	METALLIC = (1.0f - foam_percent) * metallic;
 }
 
 //void light() {

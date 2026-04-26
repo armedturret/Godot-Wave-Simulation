@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://ci3p2rtj3liu8" path="res://scripts/ocean_lod_level.gd" id="4_iqywx"]
 [ext_resource type="PlaneMesh" uid="uid://bsjqetf36cm1w" path="res://ocean_meshes/ocean_mesh_128.tres" id="6_5d2jk"]
 [ext_resource type="PlaneMesh" uid="uid://504n75u3e24s" path="res://ocean_meshes/ocean_mesh_64.tres" id="7_drgyt"]
-[ext_resource type="PackedScene" uid="uid://ym36a6x4qw4w" path="res://scenes/ocean_chunk_rough.tscn" id="8_6cjee"]
+[ext_resource type="PackedScene" uid="uid://ym36a6x4qw4w" path="res://scenes/ocean_chunk_rough.tscn" id="8_drgyt"]
 [ext_resource type="PlaneMesh" uid="uid://cg21olxpce28j" path="res://ocean_meshes/ocean_mesh_32.tres" id="8_iqywx"]
 [ext_resource type="PlaneMesh" uid="uid://c8k7q4yej68ce" path="res://ocean_meshes/ocean_mesh_16.tres" id="9_drgyt"]
 
@@ -30,7 +30,7 @@ metadata/_custom_type_script = "uid://ci3p2rtj3liu8"
 [sub_resource type="Resource" id="Resource_3pl04"]
 script = ExtResource("4_iqywx")
 mesh = ExtResource("9_drgyt")
-min_distance = 1000.0
+min_distance = 1500.0
 metadata/_custom_type_script = "uid://ci3p2rtj3liu8"
 
 [node name="GerstnerOcean" type="Node3D" unique_id=192684016]
@@ -43,7 +43,7 @@ transform = Transform3D(0.9999999, -1.8626451e-09, 1.8626451e-09, 0, 1, 0, 0, -5
 script = ExtResource("3_82v64")
 camera = NodePath("../Camera3D")
 lods = Array[ExtResource("4_iqywx")]([SubResource("Resource_cxc0e"), SubResource("Resource_5d2jk"), SubResource("Resource_igkwb"), SubResource("Resource_3pl04")])
-template = ExtResource("8_6cjee")
+template = ExtResource("8_drgyt")
 max_chunk_dist = 32
 recalc_distance = 50.0
 
